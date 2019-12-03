@@ -1,0 +1,56 @@
+﻿@page
+@model ProductsManager.Pages.CalculatorModel
+@{
+    ViewData["Title"] = "Calculator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Calculator</h2>
+
+<textarea v-for="number" readonly="readonly" cols="15" rows="1" />
+
+
+
+@section Scripts{
+    <script>
+]
+            app = new Vue({
+                el: '#root',
+                component: [
+                    'button'],
+                data: {
+                    number: ''
+                    previousNumber: ''
+                    sign: ''
+                },
+                methods: {
+                    add: function (text) {
+                        if (isNaN(num1)) {
+                            number += text
+                        }
+                        else {
+
+
+                        }
+                    }
+                    count: function{
+
+                    }
+                }
+
+
+            })
+
+            Vue.component('button', {
+                props: ['text'],
+                template: ' <button v-for='text'class='btn btn- primary w - 100 ' />',
+                methods: {
+                    clicked: function () {
+                        this.$root.add(text)
+                    }
+                }
+
+            })
+
+    </script>
+}  

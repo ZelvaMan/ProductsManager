@@ -1,0 +1,81 @@
+﻿@using ProductsManager.Managers
+@using ProductsManager.Models
+
+@{
+	ViewData["Title"] = "ShowProducts";
+	var products = ViewBag.data;
+	ShopManager manager = ViewBag.manager;
+	Layout = "_Layout";
+}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="row">
+	<div class="col-md-4"><h1>Products</h1></div>
+	<div class="col-md-1 offset-md-7">
+		<a asp-controller="Home" asp-action="ShowProductAddForm">
+			<button class="btn btn-primary">
+				<i class="far fa-plus-square" class='img-fluid w-100'></i>
+			</button>
+		</a>
+	</div>
+</div>
+
+<table class="table table-striped table-sm">
+	<thead>
+		<tr>
+
+			<th scope="col"> <b>productId</b></th>
+			<th scope="col"> <b>Product name</b></th>
+			<th scope="col"> <b>Price</b></th>
+			<th scope="col"> <b>In stock</b></th>
+			<th scope="col"> <b>Add to cart</b></th>
+			<th scope="col"><b>Remove</b></th>
+
+		</tr>
+	</thead>
+	@foreach (Product pr in products)
+	{
+		<tr>
+			<th> @pr.ID</th>
+			<th> @pr.Name</th>
+			<th> @pr.Price</th>
+			<th> <text class="text-primary">@pr.InStock </text></th>
+			<th>
+				@if (pr.ProductAvailability != Availability.UnAvailable)
+				{
+					<a asp-controller="Home" asp-action="ShowBuyProduct" asp-route-productID="@pr.ID">
+						<button class="btn btn-primary">
+							@switch (pr.ProductAvailability)
+							{
+								case Availability.InCart:
+									@:Change quantity
+									break;
+
+								case Availability.Avalible:
+									@:<i class="fas fa-cart-plus"></i>
+									break;
+
+							}
+						</button>
+					</a>
+				}
+				else
+				{
+					@:<p class="text-warning">Product isn't in stock</p>
+				}
+			</th>
+
+			<th>
+				<a asp-controller="Home" asp-action="RemoveProduct" asp-route-productID="@pr.ID">
+					<button class="btn btn-primary">
+						<i class="far fa-minus-square" class="img-responsive"></i>
+					</button>
+				</a>
+			</th>
+		</tr>
+
+	}
+</table>
