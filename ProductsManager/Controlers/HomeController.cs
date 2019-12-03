@@ -124,23 +124,7 @@ namespace ProductsManager.Controlers
 		}
 
 
-		[HttpGet("orders/info/{orderId}")]
-		public ActionResult ShowOrderInfo(int orderId, [FromQuery]int startingPosition, [FromQuery] bool canceled)
-		{
-			
-			//get last starting index
-			int lastStartIndex = manager.LastStartingPostion(canceled);
-			ViewBag.last = manager.LastStartingPostion(canceled);
-			ViewBag.canceled = canceled;
-			//if starting index is invalid(due to changed visibility of canceled orders) set starting position to last start index
-			if (startingPosition > lastStartIndex)
-			{
-				startingPosition = lastStartIndex;
-			}
-			ViewBag.start = startingPosition;
-			ViewBag.orders = manager.GetFiveOrders(canceled, startingPosition);
-			return View();
-		}
+		
 
 
 		[HttpGet("orders/info/{orderId}")]
