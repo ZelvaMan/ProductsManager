@@ -109,7 +109,6 @@ namespace ProductsManager.Controlers
 
 		[HttpGet("orders")]
 		public ActionResult ShowOrderHistory([FromQuery]int startingPosition, [FromQuery] bool canceled)
-<<<<<<< HEAD
 		{
 			bool canceledBool;
 			if (!bool.TryParse(canceled.ToString(), out canceledBool))
@@ -126,10 +125,9 @@ namespace ProductsManager.Controlers
 
 
 		[HttpGet("orders/info/{orderId}")]
-		public ActionResult ShowOrderInfo(int orderId)
+		public ActionResult ShowOrderInfo(int orderId, [FromQuery]int startingPosition, [FromQuery] bool canceled)
 		{
-=======
-		{
+			
 			//get last starting index
 			int lastStartIndex = manager.LastStartingPostion(canceled);
 			ViewBag.last = manager.LastStartingPostion(canceled);
@@ -140,8 +138,7 @@ namespace ProductsManager.Controlers
 				startingPosition = lastStartIndex;
 			}
 			ViewBag.start = startingPosition;
-
-				ViewBag.orders = manager.GetFiveOrders(canceled, startingPosition);
+			ViewBag.orders = manager.GetFiveOrders(canceled, startingPosition);
 			return View();
 		}
 
@@ -149,26 +146,17 @@ namespace ProductsManager.Controlers
 		[HttpGet("orders/info/{orderId}")]
 		public ActionResult ShowOrderInfo(int orderId)
 		{
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 			ViewBag.order = manager.FindOrderByOrderId(orderId);
 			return View();
 		}
 
 		[HttpGet("orders/cancel/{orderId}")]
-<<<<<<< HEAD
-		public ActionResult CancelOrder(int orderId) 
-=======
 		public ActionResult CancelOrder(int orderId,[FromQuery]int startingPosition ,[FromQuery]bool canceled)
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 		{
 			manager.CancelOrder(orderId);
 			return RedirectToAction(nameof(ShowOrderHistory), new RouteValueDictionary
 			{
-<<<<<<< HEAD
-				{"startingPosition", "0"}, {"canceled", false}
-=======
 				{"startingPosition", startingPosition}, {"canceled", canceled}
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 			});
 		}
 		#endregion

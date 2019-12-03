@@ -32,11 +32,8 @@ namespace ProductsManager.Managers
 		}
 
 
-<<<<<<< HEAD
-		public ShopManager(OrderItemManager orderItemManager, ProductManager productManager, UserManager userManager, OrderManager orderManager)
-=======
+
 		public ShopManager(OrderItemManager orderItemManager, ProductManager productManager, UserManager userManager, OrderManager orderManager, ApplicationState state)
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 		{
 			this.orderItemManager = orderItemManager;
 			this.orderManager = orderManager;
@@ -69,11 +66,8 @@ namespace ProductsManager.Managers
 
 		public void Buy()
 		{
-<<<<<<< HEAD
-=======
 			if(orderItemManager.OrderItems.Count == 0)
 				return;
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 			foreach (OrderItem ord in orderItemManager.OrderItems)
 			{
 				productManager.ChangeStock(ord.ProductID, -ord.Quantity);
@@ -103,8 +97,7 @@ namespace ProductsManager.Managers
 		public Order FindOrderByOrderId(int orderId)
 		{
 			return orderManager.FindOrderByOrderId(orderId);
-<<<<<<< HEAD
-=======
+
 		}
 
 		public List<Order> GetFiveOrders(bool withCanceled, int startingPosition)
@@ -141,28 +134,8 @@ namespace ProductsManager.Managers
 		public void AddProduct(ProductFormModel model)
 		{
 			productManager.AddProduct(model.Name,model.Price, model.InStock);
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 		}
 
-		public List<Order> GetFiveOrders(bool withCanceled, int startingPosition)
-		{
-			return (withCanceled ? orderManager.OrdersWithCanceled : orderManager.OrdersWithoutCanceled)
-				.Skip(startingPosition)
-				.Take(5).ToList();
-		}
 
-		public int LastStartingPostion(bool withCanceled)
-		{
-			int count = (withCanceled ? orderManager.OrdersWithCanceled : orderManager.OrdersWithoutCanceled).Count;
-			int I = count % 5;
-			if (I == 0)
-				return count - 5;
-			return count - I;
-		}
-
-		public void CancelOrder(int orderId)
-		{
-			orderManager.CancelOrder(orderId);
-		}
 	}
 }

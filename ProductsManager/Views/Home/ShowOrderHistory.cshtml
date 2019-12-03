@@ -4,21 +4,11 @@
 @{
 	ViewData["Title"] = "Order History";
 	Layout = "_Layout";
-<<<<<<< HEAD
 	bool canceled = ViewBag.canceled;
 	int startposition = ViewBag.start;
 	RouteValueDictionary data = new RouteValueDictionary {
 {"startingPosition",startposition.ToString() }
 ,{ "canceled",!canceled }
-};
-}
-
-<h2>OrdersWithoutCanceled History</h2>
-=======
-	int startposition = ViewBag.start;
-	RouteValueDictionary data = new RouteValueDictionary {
-{"startingPosition",startposition.ToString() }
-,{ "canceled",!ViewBag.canceled}
 };
 }
 
@@ -43,14 +33,11 @@
 					<a asp-controller="Home" asp-action="ShowOrderInfo" asp-route-orderId="@o.orderId"><button class="btn btn-primary">More info</button></a>
 				</td>
 				<td>
-<<<<<<< HEAD
-					<a asp-controller="Home" asp-action="CancelOrder" asp-route-orderId="@o.orderId"><button class="btn btn-primary">Cancel</button></a>
-=======
+					
 					@if (o.OrderValidity == validity.Valid)
 					{
 						<a asp-controller="Home" asp-action="CancelOrder" asp-route-orderId="@o.orderId" asp-route-startingPosition="@startposition" asp-route-canceled="@ViewBag.canceled"><button class="btn btn-primary">Cancel</button></a>
 					}
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 				</td>
 			</tr>
 		}
@@ -84,39 +71,25 @@
 		</a>
 	</div>
 	<div class="col-sm-3">
-<<<<<<< HEAD
-		<input type="checkbox" readonly="readonly" id="CBId" checked="@ViewBag.canceled" >Show Canceled Orders</input>
-=======
+
 		<input type="checkbox" readonly="readonly" id="CBId" checked="@ViewBag.canceled">Show Canceled Orders</input>
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
 
 	</div>
 </div>
 @section scripts
-<<<<<<< HEAD
 {
 <script>
-=======
-	{
-	<script>
 
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
-		$(function() {
+	$(function() {
 
 			// jQuery methods go here...
 
 			$('#CBId').change(function() {
-<<<<<<< HEAD
-				window.location.href = "@Url.Action("ShowOrderHistory",data)";
-			});
 
-		});
-</script>
-=======
-				window.location.href = "@Html.Raw(Url.Action("ShowOrderHistory",data))"
+				window.location.href = "@Html.Raw(Url.Action("ShowOrderHistory",data))";
 			});
 
 		});
 	</script>
->>>>>>> 8c4f9ee413fd4c009298c7b9ba8d3c73afc1dd3a
+
 }
