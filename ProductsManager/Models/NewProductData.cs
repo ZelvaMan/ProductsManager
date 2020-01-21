@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProductsManager.Models
 {
-	public class ProductFormModel
+	public class NewProductData
 	{
 		public string Name { get; set; }
 		public int Price { get; set; }

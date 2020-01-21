@@ -7,6 +7,10 @@ namespace ProductsManager.Managers
 	{
 		private readonly ApplicationState state;
 
+		public UserManager(ApplicationState state)
+		{
+			this.state = state;
+		}
 		public List<User> Users
 		{
 			get { return state.Users; }

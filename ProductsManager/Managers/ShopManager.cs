@@ -131,11 +131,15 @@ namespace ProductsManager.Managers
 		/// adds new product with data from addForm
 		/// </summary>
 		/// <param name="model"></param>
-		public void AddProduct(ProductFormModel model)
+		public void AddProduct(NewProductData model)
 		{
 			productManager.AddProduct(model.Name,model.Price, model.InStock);
 		}
 
+		public void ChangeProduct(int productId, string name, int price, int inStock)
+		{
+			productManager.UpdateProduct(productId, name, price, inStock);
+		}
 
 	}
 }

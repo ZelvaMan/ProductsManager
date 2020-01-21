@@ -102,5 +102,19 @@ namespace ProductsManager.Managers
 		{
 			FindProductById(productId).ProductAvailability = productAvailability;
 		}
+
+		public void UpdateProduct(int productId, string name, int price, int inStock)
+		{
+			Product p = FindProductById(productId);
+			if(p.Name != null )
+				p.Name = name;
+
+			if (p.Price != null)
+				p.Price = price;
+
+			if (p.InStock != null)
+				p.InStock = inStock;
+
+		}
 	}
 }

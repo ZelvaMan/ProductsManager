@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using ProductsManager.Managers;
 using ProductsManager.Models;
@@ -35,9 +36,13 @@ namespace ProductsManager
 			}
 
 			app.UseMvcWithDefaultRoute();
-			app.Run(async (context) =>
+			app.UseMvc(routes =>
 			{
-				await context.Response.WriteAsync("Hello World!");
+				routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+			});
+			app.Use(async (context, next) => {
+				context.Request.EnableRewind();
+				await next();
 			});
 		}
 	}
