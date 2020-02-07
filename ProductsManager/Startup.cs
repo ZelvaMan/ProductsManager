@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using ProductsManager.Managers;
 using ProductsManager.Models;
+using Serilog;
 
 namespace ProductsManager
 {
@@ -33,7 +34,7 @@ namespace ProductsManager
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
+			app.UseSerilogRequestLogging();
 			app.UseMvcWithDefaultRoute();
 			app.Run(async (context) =>
 			{
