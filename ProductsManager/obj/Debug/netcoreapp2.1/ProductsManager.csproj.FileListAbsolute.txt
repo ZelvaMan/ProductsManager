@@ -1,0 +1,15 @@
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\bin\Debug\netcoreapp2.1\Images\TurtleIcon.png
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\bin\Debug\netcoreapp2.1\ProductsManager.deps.json
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\bin\Debug\netcoreapp2.1\ProductsManager.runtimeconfig.json
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\bin\Debug\netcoreapp2.1\ProductsManager.runtimeconfig.dev.json
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\bin\Debug\netcoreapp2.1\ProductsManager.dll
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.csprojAssemblyReference.cache
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.csproj.CoreCompileInputs.cache
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.RazorAssemblyInfo.cache
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.RazorAssemblyInfo.cs
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.AssemblyInfoInputs.cache
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.AssemblyInfo.cs
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.RazorTargetAssemblyInfo.cache
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\bin\Debug\netcoreapp2.1\ProductsManager.pdb
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.dll
+C:\Dokumenty\GIT\ProductsManager\ProductsManager\obj\Debug\netcoreapp2.1\ProductsManager.pdb
