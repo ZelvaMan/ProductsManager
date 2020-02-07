@@ -1,0 +1,57 @@
+﻿@using ProductsManager.Models
+
+@{
+	ViewData["Title"] = "ShowBuyProduct";
+	Layout = "_Layout";
+	Product product = ViewBag.Product;
+
+}
+
+
+<div class="container">
+	<div class="row"><h1>AddToCart Product</h1></div>
+	<div class="row">
+		<div class="col-sm">
+			<b>Product Id</b>
+		</div>
+		<div class="col-sm">
+			@product.ID
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm">
+			Name
+		</div>
+		<div class="col-sm">
+			@product.Name
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm">
+			Price
+		</div>
+		<div class="col-sm">
+			@product.Price
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm">
+			In stock
+		</div>
+		<div class="col-sm">
+			@product.InStock
+		</div>
+	</div>
+
+	<div class="row">
+		<form asp-action="AddToCart" asp-controller="Home" asp-route-ProductID="@product.ID" method="post">
+			<label>Quantity</label>
+				<input placeholder=" " id="Quantity" type="number" name="Quantity" min="1" max="@product.InStock"/>
+
+			<input type="submit" value="Add to cart"/>
+		</form>
+	</div>
+</div>

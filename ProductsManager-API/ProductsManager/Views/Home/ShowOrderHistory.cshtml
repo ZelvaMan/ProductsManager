@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Routing
+@using ProductsManager.Models
+
+@{
+	ViewData["Title"] = "Order History";
+	Layout = "_Layout";
+	bool canceled = ViewBag.canceled;
+	int startposition = ViewBag.start;
+	RouteValueDictionary data = new RouteValueDictionary {
+{"startingPosition",startposition.ToString() }
+,{ "canceled",!canceled }
+};
+}
+
+<h2>Orders</h2>
+<table class="table table-striped table-sm">
+	<thead>
+		<tr>
+			<th>Order Id</th>
+			<th> number of products</th>
+			<th> more info</th>
+			<th> cancel</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Order o in ViewBag.orders)
+		{
+			<tr>
+				<td>@o.orderId</td>
+				<td>@o.NumberOfProducts</td>
+				<td>
+					<a asp-controller="Home" asp-action="ShowOrderInfo" asp-route-orderId="@o.orderId"><button class="btn btn-primary">More info</button></a>
+				</td>
+				<td>
+					
+					@if (o.OrderValidity == validity.Valid)
+					{
+						<a asp-controller="Home" asp-action="CancelOrder" asp-route-orderId="@o.orderId" asp-route-startingPosition="@startposition" asp-route-canceled="@ViewBag.canceled"><button class="btn btn-primary">Cancel</button></a>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+
+</table>
+<div class="row  justify-content-start">
+	<div class="col">
+		<a class="nav-link" asp-controller="Home" asp-action="ShowOrderHistory" asp-route-startingPosition="0" asp-route-canceled="@ViewBag.canceled">
+			<button class="btn btn-primary"><i class="fas fa-angle-double-left"></i> </button>
+		</a>
+	</div><div class="col">
+		@if (startposition >= 5)
+		{
+			<a class="nav-link" asp-controller="Home" asp-action="ShowOrderHistory" asp-route-startingPosition="@(startposition - 5)" asp-route-canceled="@ViewBag.canceled">
+				<button class="btn btn-primary"><i class="fas fa-angle-left"></i></button>
+			</a>
+
+		}
+	</div><div class="col">
+		@if (ViewBag.last != startposition)
+		{
+
+			<a class="nav-link" asp-controller="Home" asp-action="ShowOrderHistory" asp-route-startingPosition="@(startposition + 5) " asp-route-canceled="@ViewBag.canceled">
+				<button class="btn btn-primary"><i class="fas fa-angle-right"></i> </button>
+			</a>
+		}
+	</div><div class="col-sm-3">
+		<a class="nav-link" asp-controller="Home" asp-action="ShowOrderHistory" asp-route-startingPosition="@ViewBag.last" asp-route-canceled="@ViewBag.canceled">
+			<button class="btn btn-primary"><i class="fas fa-angle-double-right"></i> </button>
+		</a>
+	</div>
+	<div class="col-sm-3">
+
+		<input type="checkbox" readonly="readonly" id="CBId" checked="@ViewBag.canceled">Show Canceled Orders</input>
+
+	</div>
+</div>
+@section scripts
+{
+<script>
+
+	$(function() {
+
+			// jQuery methods go here...
+
+			$('#CBId').change(function() {
+
+				window.location.href = "@Html.Raw(Url.Action("ShowOrderHistory",data))";
+			});
+
+		});
+	</script>
+
+}
