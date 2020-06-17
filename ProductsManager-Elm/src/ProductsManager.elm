@@ -15,7 +15,7 @@ import Bulma.Modifiers
         , State(..)
         , VerticalDirection(..)
         )
-import Html exposing (..)
+import Html exposing (text, Html, span)
 import Html.Events exposing (onClick)
 import Http exposing (..)
 import Json.Decode as Decode exposing (..)
@@ -28,14 +28,16 @@ import Json.Decode.Pipeline exposing (..)
 
 main =
     Browser.element
-        { init = always ( { products = Nothing, page = Products }, Cmd.none )
+        {  init = init
         , subscriptions = subs
         , update = update
         , view = view
         }
 
-
-subs : model -> Sub msg
+init : () -> (Model, Cmd msg)
+init m =
+ ( (Model Nothing   Products ), Cmd.none )
+subs : Model -> Sub msg
 subs model =
     Sub.none
 
@@ -170,12 +172,11 @@ availabilityDecoder =
 
 view : Model -> Html Msg
 view model =
-    div []
-        []
+    myHero model
 
 
-myHero : Html Msg
-myHero =
+myHero :Model-> Html Msg
+myHero model  =
     easyHero
         (HeroModifiers
             False
@@ -188,7 +189,7 @@ myHero =
                 [ myNavbar True True ]
         , body =
             heroBody []
-                []
+                [listOfProducts (model.products)]
         , foot =
             heroFoot []
                 []
@@ -200,14 +201,12 @@ myNavbar isMenuOpen isMenuDropdownOpen =
     navbar navbarModifiers
         []
         [ navbarBrand []
-            (navbarBurger
-                isMenuOpen
-                []
-                [ span [] []
-                , span [] []
-                , span [] []
-                ]
-            )
+            ( navbarBurger False []
+        [ span [] []
+        , span [] []
+        , span [] []
+        ]
+      )
             [ navbarItem False
                 []
                 [ easyImage Natural
@@ -261,3 +260,50 @@ myNavbar isMenuOpen isMenuDropdownOpen =
                 ]
             ]
         ]
+
+listOfProducts: (Maybe(List Product)) -> Html Msg
+listOfProducts products 
+     = table myTableModifiers []
+    [ tableHead [] []
+    , tableBody [] 
+      (Maybe.withDefault (List.singleton( tableRow False  []
+      [  
+         tableCell [] [text "No products"]
+      ]) ) 
+      ( products |> Maybe.map (List.map productTableRow)))
+    
+    , tableFoot [] []
+    ]
+myTableModifiers : TableModifiers
+myTableModifiers =
+    { bordered  = True
+    , striped =  True
+    , narrow = True
+    , hoverable = True
+    , fullWidth = True
+    }
+
+productTableRow: Product -> TableRow msg
+productTableRow product  =
+    tableRow False  []
+      [  
+         tableCell [] [text (String.fromInt product.id)]
+        , tableCell [] []
+        , tableCell [] []
+        , tableCell [] []
+        , tableCell [] []
+        , tableCell [] []
+      ]
+
+productsTableHead : Html Msg
+productsTableHead 
+  = tableHead []
+    [ tableRow False []
+      [ tableCellHead [] [text  "Id"]
+      , tableCellHead [] [text  "Name"]
+      , tableCellHead [] [text  "Price"]
+      , tableCellHead [] [text  "In Stock"]
+      , tableCellHead [] [text  "Avallibity"]
+      , tableCellHead [] [text  "Add to cart"]
+      ]
+    ]
